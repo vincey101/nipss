@@ -1,0 +1,582 @@
+.content-wrapper {
+  min-height: 100vh;
+  padding: 0;
+}
+
+.content-header {
+  padding: 5px 0.5rem;
+  margin-bottom: 0;
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+
+.content {
+  padding: 0;
+  width: 100%;
+}
+
+.content-block {
+  padding: 0;
+  width: 100%;
+  max-width: 2000px;
+  margin: 0 auto;
+}
+
+.block-header {
+  padding: 0 0 5px 0;
+  
+  .page-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+}
+
+.card {
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background: #fff;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: -5px;
+}
+
+.body {
+  padding: 20px;
+}
+
+.preview-box {
+  border: 1px solid #ddd;
+  padding: 20px;
+  min-height: 480px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  position: relative;
+  margin-top: 30px;
+  width: 100%;
+  transform: scale(0.9);
+  transform-origin: top center;
+  margin-left: 5px;
+
+  .letterhead {
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 5px;
+    page-break-inside: avoid;
+    border-bottom: none;
+
+    .letterhead-logo {
+      max-width: 75px !important;
+      height: auto !important;
+      display: block;
+      margin: 0 auto;
+      page-break-inside: avoid;
+    }
+  }
+
+  .memorandum-header {
+    border-bottom: none;
+    margin-bottom: 1rem;
+  }
+
+  .memo-details {
+    background-color: #f5f5f5 !important;
+    margin: 15px 0;
+    padding: 10px;
+    page-break-inside: avoid;
+
+    .row {
+      margin-bottom: 5px;
+      display: flex;
+      flex-wrap: nowrap;
+      
+      .col-3 {
+        flex: 0 0 80px;
+        min-width: 80px;
+        
+        strong {
+          color: black;
+          font-weight: bold;
+          white-space: nowrap;
+        }
+      }
+
+      .col-9 {
+        flex: 1;
+        padding-left: 10px;
+        word-break: break-word;
+      }
+    }
+  }
+}
+
+.template-selector {
+  margin-bottom: 15px;
+  padding: 8px 0;
+
+  .form-check-inline {
+    margin-right: 20px;
+  }
+}
+
+.quill-editor-container {
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  height: 350px;
+  overflow-y: auto;
+  width: 98% !important;
+  margin-top: 10px;
+  position: relative;
+
+  .ql-toolbar.ql-snow {
+    border-radius: 4px 4px 0 0;
+    border-color: #ccc;
+  }
+  
+  .ql-container.ql-snow {
+    border-radius: 0 0 4px 4px;
+    border-color: #ccc;
+    min-height: 370px;
+  }
+  
+  #quill-editor {
+    min-height: 370px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+}
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.letterhead {
+  border-bottom: 2px solid #000;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
+
+.memo-details {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.preview-content {
+  padding: 1rem;
+}
+
+.row {
+  width: 100%;
+  margin: 0;
+}
+
+.btn {
+  margin-right: 8px;
+}
+
+section.content {
+  margin-left: 250px !important;
+  padding: 10px 5px !important;
+  width: calc(100% - 250px) !important;
+  margin-top: 15px !important;
+}
+
+.col-md-8 {
+  flex: 0 0 60% !important;
+  max-width: 60% !important;
+  padding-right: 0 !important;
+}
+
+.col-md-4 {
+  flex: 0 0 40% !important;
+  max-width: 40% !important;
+  padding-left: 0 !important;
+}
+
+.col-md-8.mb-3 {
+  flex: 0 0 98% !important;
+  max-width: 98% !important;
+}
+
+.form-label {
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+
+.text-danger {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.template2-preview {
+  .official-letterhead {
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+
+    .col-2 {
+      margin-top: -10px;
+      margin-left: -25px !important;
+    }
+
+    .letterhead-logo-left {
+      max-width: 75px !important;
+      height: auto !important;
+      margin-left: -10px;
+    }
+
+    .col-10 {
+      padding-right: 0;
+    }
+
+    h4 {
+      font-size: 8.5px !important;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+      margin-top: 5px;
+      padding-right: 5px;
+    }
+
+    .d-flex.flex-column {
+      margin-top: -5px;
+    }
+  }
+  
+  .official-letter-content {
+    padding: 5px;
+    margin-top: -15px;
+
+    p:first-child {
+      font-size: 11px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 25px !important;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.modal-dialog.modal-lg {
+  margin-right: 10%;
+  margin-left: auto;
+}
+
+.m-r-10 {
+  margin-right: 10px;
+}
+
+.ai-button {
+  position: absolute;
+  top: -10px;
+  right: 45px;
+  background-color: white;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  cursor: pointer;
+
+  span {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 991px) {
+  section.content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 10px !important;
+  }
+
+  .col-md-8, .col-md-4 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    padding: 0 15px !important;
+  }
+
+  .preview-box {
+    margin-top: 30px;
+    transform: scale(1);
+    margin-left: 0;
+
+    .memo-details {
+      .row {
+        .col-3 {
+          flex: 0 0 70px;
+          min-width: 70px;
+        }
+      }
+    }
+  }
+
+  .sharing-section {
+    .col-md-6 {
+      flex: 0 0 100%;
+      max-width: 100%;
+      padding: 0 15px;
+      margin-bottom: 15px;
+    }
+  }
+
+  .quill-editor-container {
+    width: 100% !important;
+    margin: 10px 0;
+  }
+
+  .card {
+    margin: 10px 0;
+  }
+
+  .body {
+    padding: 15px;
+  }
+
+  // Improve form field spacing on mobile
+  .sharing-field {
+    margin-bottom: 15px;
+    
+    .row {
+      margin: 5px 0;
+    }
+  }
+
+  // Adjust select dropdowns for better mobile experience
+  ::ng-deep {
+    .ng-select.compact-select {
+      .ng-select-container {
+        min-height: 42px; // Slightly larger touch target
+      }
+    }
+  }
+}
+
+// Additional small screen optimizations
+@media (max-width: 576px) {
+  .content-header {
+    padding: 5px;
+    
+    h1 {
+      font-size: 1.25rem;
+    }
+  }
+
+  .preview-box {
+    padding: 10px;
+    transform: scale(1);
+    
+    .letterhead-logo {
+      max-width: 60px !important;
+    }
+
+    .memo-details {
+      padding: 8px;
+      
+      .row {
+        margin-bottom: 3px;
+        
+        .col-3 {
+          flex: 0 0 65px;
+          min-width: 65px;
+          padding-right: 5px;
+        }
+
+        .col-9 {
+          padding-left: 5px;
+        }
+      }
+    }
+  }
+
+  .template2-preview {
+    .official-letterhead {
+      .col-2 {
+        margin-left: -15px !important;
+      }
+    }
+  }
+
+  .modal-dialog.modal-lg {
+    margin: 10px;
+  }
+}
+
+// Quill editor customization
+::ng-deep {
+  .quill-editor-container {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 400px;
+    overflow-y: auto;
+    width: 98% !important;
+    margin-top: 10px;
+    position: relative;
+
+    .ql-toolbar.ql-snow {
+      border-radius: 4px 4px 0 0;
+      border-color: #ccc;
+    }
+    
+    .ql-container.ql-snow {
+      border-radius: 0 0 4px 4px;
+      border-color: #ccc;
+      min-height: 370px;
+    }
+    
+    #quill-editor {
+      min-height: 370px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  }
+
+  // Additional Quill preview styling
+  .preview-content {
+    // Size styling
+    .ql-size-small {
+      font-size: 0.75em;
+    }
+    
+    .ql-size-large {
+      font-size: 1.5em;
+    }
+    
+    .ql-size-huge {
+      font-size: 2.5em;
+    }
+    
+    // List styling
+    .ql-indent-1 {
+      padding-left: 3em;
+    }
+    
+    .ql-indent-2 {
+      padding-left: 6em;
+    }
+    
+    ul, ol {
+      padding-left: 1.5em;
+    }
+    
+    // Block styling
+    blockquote {
+      border-left: 4px solid #ccc;
+      margin-bottom: 5px;
+      margin-top: 5px;
+      padding-left: 16px;
+    }
+    
+    code, pre {
+      background-color: #f0f0f0;
+      border-radius: 3px;
+      padding: 2px 4px;
+      font-family: monospace;
+    }
+
+    // Alignment styles
+    .ql-align-center {
+      text-align: center;
+    }
+    
+    .ql-align-right {
+      text-align: right;
+    }
+    
+    .ql-align-justify {
+      text-align: justify;
+    }
+  }
+}
+
+.sharing-section {
+  width: 100%;
+  margin: 0;
+  padding: 15px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sharing-field {
+  margin-bottom: 20px;
+  
+  h6.vew-mail-header {
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  
+  .compact-select {
+    width: 100%;
+  }
+
+  // Ensure checkboxes and date fields are properly aligned
+  .row {
+    margin: 8px 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .col-md-6 {
+    padding: 5px;
+  }
+
+  mat-checkbox {
+    margin-left: 5px;
+  }
+}
+
+// Override standard column sizes when in the sharing section
+.sharing-section {
+  .col-md-6 {
+    @media (min-width: 992px) {
+      flex: 0 0 50%;
+      max-width: 50%;
+      padding: 0 15px;
+    }
+    
+    @media (max-width: 991px) {
+      flex: 0 0 100%;
+      max-width: 100%;
+      padding: 0 15px;
+    }
+  }
+}
+
+// Enhance ng-select appearance
+::ng-deep {
+  .ng-select.compact-select {
+    .ng-select-container {
+      min-height: 38px;
+      border-radius: 4px;
+      border-color: #ced4da;
+    }
+    
+    &.ng-select-focused .ng-select-container {
+      border-color: #80bdff;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    
+    .ng-value {
+      margin-right: 5px;
+      background-color: #f0f0f0;
+      border-radius: 3px;
+      padding: 2px 5px;
+    }
+  }
+} 

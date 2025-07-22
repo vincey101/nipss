@@ -1,0 +1,148 @@
+<div class="container-fluid p-0" [dir]="direction">
+  <div class="row g-0">
+    <div class="col-lg-8">
+      <div class="auth-bg">
+        <div *ngIf="bannerImage" class="bg-overlay" style='background-image: url({{bannerImage}});'></div>
+        <div *ngIf="!bannerImage" class="bg-overlay" style='background-image: url("assets/images/kuru.png");'>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="auth-content p-4 d-flex align-items-center min-vh-100">
+        <div class="form-container">
+          <div class="text-center">
+            <div class="m-b-10">
+              <a class="logo-full"><img *ngIf="logoImage" [src]="logoImage" alt="logo-full"></a>
+              <a class="logo-full"><img *ngIf="!logoImage" src="assets/images/nipss.png" alt="logo-full"></a>
+            </div>
+            <p class="text-muted">AI-Powered Memo Intelligence</p>
+          </div>
+          <div class="p-2 mt-5">
+            <form [formGroup]="registerFormGroup" (submit)="onRegisterSubmit()">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">{{'FIRST_NAME' | translate}}</label>
+                    <input formControlName="firstName" class="form-control" type="text">
+                    <div class="text-danger"
+                      *ngIf="registerFormGroup.get('firstName').touched && registerFormGroup.get('firstName')?.hasError('required')">
+                      {{'FIRST_NAME_IS_REQUIRED' | translate}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">{{'LAST_NAME' | translate}}</label>
+                    <input formControlName="lastName" class="form-control" type="text">
+                    <div class="text-danger"
+                      *ngIf="registerFormGroup.get('lastName').touched && registerFormGroup.get('lastName')?.hasError('required')">
+                      {{'LAST_NAME_IS_REQUIRED' | translate}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">{{'EMAIL' | translate}}</label>
+                    <input formControlName="email" class="form-control" type="email">
+                    <div class="text-danger"
+                      *ngIf="registerFormGroup.get('email').touched && registerFormGroup.get('email')?.hasError('required')">
+                      {{'EMAIL_IS_REQUIRED' | translate}}
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="registerFormGroup.get('email').touched && registerFormGroup.get('email')?.hasError('email')">
+                      {{'PLEASE_ENTER_VALID_EMAIL' | translate}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">{{'Mobile Number' | translate}}</label>
+                    <input formControlName="phoneNumber" class="form-control" type="tel">
+                    <div class="text-danger"
+                      *ngIf="registerFormGroup.get('phoneNumber').touched && registerFormGroup.get('phoneNumber')?.hasError('required')">
+                      {{'Phone number is required' | translate}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">{{'Department' | translate}}</label>
+                    <select formControlName="department" class="form-control">
+                      <option value="">{{'Select Department' | translate}}</option>
+                      <option *ngFor="let dept of departments" [value]="dept.id">{{dept.name}}</option>
+                    </select>
+                    <div class="text-danger"
+                      *ngIf="registerFormGroup.get('department').touched && registerFormGroup.get('department')?.hasError('required')">
+                      {{'Department is required' | translate}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">{{'Position' | translate}}</label>
+                    <select formControlName="position" class="form-control">
+                      <option value="">{{'Select Position' | translate}}</option>
+                      <option *ngFor="let pos of positions" [value]="pos.id">{{pos.name}}</option>
+                    </select>
+                    <div class="text-danger"
+                      *ngIf="registerFormGroup.get('position').touched && registerFormGroup.get('position')?.hasError('required')">
+                      {{'Position is required' | translate}}
+                    </div>
+                  </div>
+                </div>
+                                            
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">{{'PASSWORD' | translate}}</label>
+                    <input type="password" formControlName="password" class="form-control">
+                    <div class="text-danger"
+                      *ngIf="registerFormGroup.get('password').touched && registerFormGroup.get('password')?.hasError('required')">
+                      {{'PASSWORD_IS_REQUIRED' | translate}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">{{'CONFIRM_PASSWORD' | translate}}</label>
+                    <input type="password" formControlName="confirmPassword" class="form-control">
+                    <div class="text-danger"
+                      *ngIf="registerFormGroup.get('confirmPassword').touched && registerFormGroup.get('confirmPassword')?.hasError('required')">
+                      {{'CONFIRM_PASSWORD_IS_REQUIRED' | translate}}
+                    </div>
+                    <div class="text-danger"
+                      *ngIf="registerFormGroup.get('confirmPassword').touched && registerFormGroup.get('confirmPassword')?.hasError('passwordMismatch')">
+                      {{'PASSWORDS_DO_NOT_MATCH' | translate}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">{{'ROLES' | translate}}</label>
+                    <select formControlName="roles" class="form-control">
+                      <option value="">{{'SELECT_ROLE' | translate}}</option>
+                      <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
+                    </select>
+                    <div class="text-danger"
+                      *ngIf="registerFormGroup.get('roles').touched && registerFormGroup.get('roles')?.hasError('required')">
+                      {{'ROLE_IS_REQUIRED' | translate}}
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-12 mb-3">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a class="text-muted" [routerLink]="['/login']">{{'Already have an account' | translate}}? Login</a>
+                    <button mat-flat-button color="primary" class="login100-form-btn btn-sm" type="submit">
+                      {{'REGISTER' | translate}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

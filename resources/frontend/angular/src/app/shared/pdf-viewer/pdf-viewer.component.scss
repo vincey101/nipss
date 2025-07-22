@@ -1,0 +1,99 @@
+:host {
+  position: relative;
+  display: block;
+  height: 100%;
+}
+
+.custom-toolbar {
+  position: absolute;
+  z-index: 1000;
+  // top: 2px;     // You can adjust these values
+  right: 410px;   // to position the camera wherever you want
+  
+  // Make the button more visible and accessible on mobile
+  @media (max-width: 768px) {
+    right: 10px;  // Position on the right side for mobile
+    top: -5px;    // Position at the top for mobile
+    
+    .screenshot-btn {
+      // Increase size for better touch target on mobile
+      mat-icon {
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+      }
+    }
+  }
+
+  // For very small screens
+  @media (max-width: 480px) {
+    top: -2px;
+    right: 5px;
+  }
+
+  .screenshot-btn {
+    // color: #3e4349;
+    color: #808080;
+    min-width: unset;    // Remove minimum width
+    padding: 0;
+    background: none;    // Remove background
+    box-shadow: none;    // Remove shadow
+    border: none;        // Remove border
+    
+    &:hover {
+      mat-icon {
+        // color: #000; 
+        color: #242628;
+      }
+    }
+    
+    mat-icon {
+      font-size: 24px;   // Increased from 18px
+      width: 24px;       // Increased from 18px
+      height: 24px;      // Increased from 18px
+      line-height: 24px;
+      margin: 0;
+      padding: 0;
+      transition: color 0.2s ease;  // Smooth color transition for hover
+    }
+  }
+}
+
+::ng-deep ngx-extended-pdf-viewer {
+  position: relative;
+  display: block;
+  height: 100%;
+  
+  // Fix for mobile PDF viewer
+  @media (max-width: 768px) {
+    .toolbar {
+      padding-right: 40px; // Make room for our camera icon
+    }
+  }
+}
+
+:host ::ng-deep {
+  .toolbarButton {
+    min-width: 16px;
+    padding: 2px 6px 0;
+    border: 0 none;
+    border-radius: 2px;
+    background-color: transparent;
+    height: 25px;
+
+    &:hover {
+      background-color: hsla(0,0%,0%,.12);
+      box-shadow: 0 1px 0 hsla(0,0%,100%,.05) inset,
+                 0 0 1px hsla(0,0%,100%,.15) inset,
+                 0 0 1px hsla(0,0%,0%,.05);
+    }
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: hsla(0,0%,0%,.8);
+      transform: scale(0.9);
+    }
+  }
+}

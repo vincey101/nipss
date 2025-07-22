@@ -1,0 +1,468 @@
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Memo Broadcast</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="content">
+    <div class="content-block">
+      <div class="block-header">
+        <div class="breadcrumb-main">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <span class="mb-0 page-title">Memo Broadcast</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="body">
+              <form [formGroup]="documentForm">
+                <div class="row">
+                  <!-- Template Selection -->
+                  <div class="col-md-12 mb-2">
+                    <label class="form-label">Template Selection</label>
+                    <div class="template-selector">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="template1" value="template1"
+                          formControlName="templateType" checked>
+                        <label class="form-check-label" for="template1">Template 1</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="template2" value="template2"
+                          formControlName="templateType">
+                        <label class="form-check-label" for="template2">Template 2</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row align-items-start">
+                    <div class="col-md-8">
+                      <div class="row">
+                        <!-- Subject Field -->
+                        <div class="col-md-8 mb-3">
+                          <label class="form-label">Subject</label>
+                          <input formControlName="subject" class="form-control" type="text" placeholder="Enter subject">
+                          <div class="text-danger" *ngIf="
+                              documentForm.get('subject').touched &&
+                              documentForm.get('subject')?.hasError('required')
+                            ">
+                            Subject is required
+                          </div>
+                        </div>
+
+                        <!-- Content Editor -->
+                        <div class="col-md-12">
+                          <label class="form-label">Content</label>
+                          <div style="position: relative;">
+                            <!-- <div (click)="openAiModal()"
+                              style="cursor: pointer; position: absolute; top: -10px; right: 3px; background-color: white; border: 2px solid #ddd; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; z-index: 1;">
+                              <span style="color: #ff0000; font-weight: bold; font-size: 12px;">AI</span>
+                            </div> -->
+                            <div class="quill-editor-container">
+                              <div id="quill-editor"></div>
+                              <input type="hidden" formControlName="content">
+                            </div>
+                          </div>
+                          <div class="text-danger" *ngIf="
+                              documentForm.get('content').touched &&
+                              documentForm.get('content')?.hasError('required')
+                            ">
+                            Content is required
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Preview Box -->
+                    <div class="col-md-4">
+                      <div class="preview-box" style="transform: scale(0.9); transform-origin: top center;">
+                        <!-- Template 1 -->
+                        <div *ngIf="documentForm.get('templateType').value === 'template1'">
+                          <div class="letterhead text-center">
+                            <img src="assets/images/nipss.png" alt="NIPSS Logo" class="letterhead-logo"
+                              style="max-width: 75px !important; height: auto !important;">
+                            <h4 class="mt-2 mb-0" style="font-size: 14px;">NATIONAL INSTITUTE</h4>
+                            <p class="mb-1" style="font-size: 12px; font-style: italic; margin-top: 2px;">
+                              <!-- {{ userDepartment.includes('Dept') ? userDepartment : userDepartment + ' Department' }} -->
+                              {{ userDepartment }} Department
+                            </p>
+                            <h5 class="memorandum-header mb-1" style="font-size: 12px;">MEMORANDUM</h5>
+                          </div>
+                          <div class="memo-details"
+                            style="background-color: #f5f5f5 !important; padding: 8px; font-size: 10px; margin-top: -15px;">
+                            <div class="row mb-1">
+                              <div class="col-3" style="font-size: 10px;"><strong>To:</strong></div>
+                              <div class="col-9" style="font-size: 10px;">
+                                <ng-container *ngIf="documentForm.get('toAllUsers')?.value; else normalToUsers">
+                                  All staff
+                                </ng-container>
+                                <ng-template #normalToUsers>
+                                  {{ getSelectedToUsersString() }}
+                                </ng-template>
+                              </div>
+                            </div>
+                            <!-- <div class="row mb-1">
+                              <div class="col-3" style="font-size: 10px;"><strong>Through:</strong></div>
+                              <div class="col-9" style="font-size: 10px;">
+                                {{ getSelectedThroughUsersString() }}
+                              </div>
+                            </div> -->
+                            <div class="row mb-1">
+                              <div class="col-3" style="font-size: 10px;"><strong>From:</strong></div>
+                              <div class="col-9" style="font-size: 10px;">
+                                {{ getCurrentUser() }}
+                              </div>
+                            </div>
+                            <div class="row mb-1">
+                              <div class="col-3" style="font-size: 10px;"><strong>Date:</strong></div>
+                              <div class="col-9" style="font-size: 10px;">
+                                {{ getCurrentDate() | date:'mediumDate' }}
+                              </div>
+                            </div>
+                            <div class="row mb-1">
+                              <div class="col-3" style="font-size: 10px;"><strong>Subject:</strong></div>
+                              <div class="col-9" style="font-size: 10px;">
+                                {{ documentForm.get('subject').value }}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="preview-content mt-2">
+                            <div class="preview-body" [innerHTML]="documentForm.get('content').value"
+                              style="font-size: 10px;"></div>
+                          </div>
+
+                          <!-- Signature Preview -->
+                          <div class="signature-preview mt-3" *ngIf="signatureImageUrl" [ngStyle]="{
+                              'text-align': documentForm.get('signaturePosition').value,
+                              'margin-top': '20px',
+                              'padding-left': documentForm.get('signaturePosition').value === 'left' ? '0' : 
+                                            documentForm.get('signaturePosition').value === 'right' ? '65%' : 'initial',
+                              'padding-right': documentForm.get('signaturePosition').value === 'left' ? '80%' : 'initial',
+                              'margin-left': documentForm.get('signaturePosition').value === 'left' ? '-9%' : 'initial'
+                            }">
+                            <img [src]="signatureImageUrl" alt="Signature" style="max-height: 60px; max-width: 200px;">
+                          </div>
+                        </div>
+
+                        <!-- Template 2 -->
+                        <div *ngIf="documentForm.get('templateType').value === 'template2'" class="template2-preview">
+                          <div class="official-letterhead">
+                            <div class="row" style="margin-left: -5px; ">
+                              <div class="col-2">
+                                <img src="assets/images/nipss.png" alt="NIPSS Logo" class="letterhead-logo-left"
+                                  style="max-width: 65px !important; height: auto !important; margin-top: -5px;">
+                              </div>
+                              <div class="col-10" style="padding-left: 0;">
+                                <div class="d-flex flex-column">
+                                  <div>
+                                    <h4 style="font-size: 9px; font-weight: bold; text-transform: uppercase; margin-bottom: 8px; letter-spacing: -0.2px;">
+                                      NATIONAL INSTITUTE FOR POLICY AND STRATEGIC STUDIES, KURU
+                                    </h4>
+                                  </div>
+                                  <div class="contact-info-block" style="font-size: 8px; line-height: 1.4; text-align: left; padding-left: 40%;">
+                                    <p class="mb-0">PMB 2024, Bukuru, Plateau State, Nigeria</p>
+                                    <p class="mb-0">Email: info&#64;nipsskuru.gov.ng</p>
+                                    <p class="mb-0">Date: {{ getCurrentDate() | date:'mediumDate' }}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="official-letter-content" style="margin-top: 20px; padding: 0 15px;">
+                            <div *ngIf="documentForm.get('subject').value" style="margin-bottom: 10px;">
+                              <p style="font-size: 11px; font-weight: bold; text-align: center;">
+                                {{ documentForm.get('subject').value | uppercase }}
+                              </p>
+                            </div>
+                            <div class="preview-body" [innerHTML]="documentForm.get('content').value"
+                              style="font-size: 10px;"></div>
+                            
+                            <!-- Signature Preview -->
+                            <div class="signature-preview mt-3" *ngIf="signatureImageUrl"
+                              [ngStyle]="{
+                                'text-align': documentForm.get('signaturePosition').value,
+                                'margin-top': '20px',
+                                'padding-left': documentForm.get('signaturePosition').value === 'left' ? '0' : 
+                                              documentForm.get('signaturePosition').value === 'right' ? '65%' : 'initial',
+                                'padding-right': documentForm.get('signaturePosition').value === 'left' ? '80%' : 'initial',
+                                'margin-left': documentForm.get('signaturePosition').value === 'left' ? '-9%' : 'initial'
+                              }">
+                              <img [src]="signatureImageUrl" 
+                                   alt="Signature" 
+                                   style="max-height: 60px; max-width: 200px;">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Signature Upload and Position -->
+                  <div class="col-md-12 ms-2">
+                    <div class="row">
+                      <div class="col-md-8">
+                        <label class="form-label">Signature</label>
+                        <div class="d-flex align-items-center">
+                          <select class="form-control me-2" formControlName="selectedSignature" (change)="onSignatureSelect($event)">
+                            <option value="">Select a signature</option>
+                            <option *ngFor="let sig of savedSignatures" [value]="sig.id">{{sig.name}}</option>
+                          </select>
+                          <button type="button" class="btn btn-outline-primary" (click)="openSignatureManager()">
+                            <i-feather name="settings" class="small-icon"></i-feather>
+                            Manage
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col-md-4 d-flex flex-column mt-2">
+                        <label class="form-label mb-2">Signature Position</label>
+                        <select class="form-control" formControlName="signaturePosition">
+                          <option value="left">Left</option>
+                          <option value="center">Center</option>
+                          <option value="right">Right</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- To All Users Checkbox -->
+                  <div class="row mt-4 mb-2">
+                    <div class="col-md-12">
+                      <mat-checkbox color="primary" formControlName="toAllUsers">
+                        To all Staff
+                      </mat-checkbox>
+                    </div>
+                  </div>
+
+                  <!-- Sharing Options Section -->
+                  <div class="row sharing-section mt-4" *ngIf="!documentForm.get('toAllUsers').value">
+                    <!-- To -->
+                    <div class="col-md-6 sharing-field">
+                      <h6 class="vew-mail-header">To:</h6>
+                      <ng-select [multiple]="true" formControlName="selectedToUsers" class="compact-select">
+                        <ng-option *ngFor="let user of userStore.formattedUserPositions()" [value]="user">
+                          {{user.displayName}}
+                        </ng-option>
+                      </ng-select>
+                      <ng-container *ngIf="documentForm.get('selectedToUsers')?.value?.length > 0"
+                        formGroupName="toUserPermissionForm">
+                        <div class="row">
+                          <mat-checkbox (change)="toUserTimeBoundChange($event)" color="primary"
+                            formControlName="isTimeBound">
+                            Specify the period</mat-checkbox>
+                        </div>
+                        <div class="row" *ngIf="toUserPermissionFormGroup.get('isTimeBound').value">
+                          <div class="col-md-6">
+                            <input [min]="minDate" class="form-control" placeholder="Start Date"
+                              formControlName="startDate" [owlDateTimeTrigger]="date1" [owlDateTime]="date1">
+                            <owl-date-time #date1></owl-date-time>
+                            <mat-error class="text-danger"
+                              *ngIf="toUserPermissionFormGroup.get('startDate').touched && toUserPermissionFormGroup.get('startDate').hasError('required')">
+                              Start date is required
+                            </mat-error>
+                          </div>
+                          <div class="col-md-6">
+                            <input [min]="toUserPermissionFormGroup.get('startDate').value" class="form-control"
+                              placeholder="End Date" formControlName="endDate"
+                              [owlDateTimeTrigger]="date2" [owlDateTime]="date2">
+                            <owl-date-time #date2></owl-date-time>
+                            <mat-error class="text-danger"
+                              *ngIf="toUserPermissionFormGroup.get('startDate').touched && toUserPermissionFormGroup.get('endDate').hasError('required')">
+                              End date is required
+                            </mat-error>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <mat-checkbox color="primary" formControlName="isAllowDownload">Allow Download</mat-checkbox>
+                        </div>
+                      </ng-container>
+                    </div>
+
+                    <!-- Assign with roles -->
+                    <div class="col-md-6 sharing-field">
+                      <h6 class="vew-mail-header">Assign with roles:</h6>
+                      <ng-select [multiple]="true" formControlName="selectedRoles" class="compact-select">
+                        <ng-option *ngFor="let role of roles" [value]="role">{{role.name}}</ng-option>
+                      </ng-select>
+                      <ng-container *ngIf="documentForm.get('selectedRoles')?.value?.length > 0"
+                        formGroupName="rolePermissionForm">
+                        <div class="row">
+                          <mat-checkbox (change)="roleTimeBoundChange($event)" color="primary"
+                            formControlName="isTimeBound">
+                            Specify the period</mat-checkbox>
+                        </div>
+                        <div class="row" *ngIf="rolePermissionFormGroup.get('isTimeBound').value">
+                          <div class="col-md-6">
+                            <input [min]="minDate" class="form-control" placeholder="Start Date"
+                              formControlName="startDate" [owlDateTimeTrigger]="date5" [owlDateTime]="date5">
+                            <owl-date-time #date5></owl-date-time>
+                            <mat-error class="text-danger"
+                              *ngIf="rolePermissionFormGroup.get('startDate').touched && rolePermissionFormGroup.get('startDate').hasError('required')">
+                              Start date is required
+                            </mat-error>
+                          </div>
+                          <div class="col-md-6">
+                            <input [min]="rolePermissionFormGroup.get('startDate').value" class="form-control"
+                              placeholder="End Date" formControlName="endDate"
+                              [owlDateTimeTrigger]="date6" [owlDateTime]="date6">
+                            <owl-date-time #date6></owl-date-time>
+                            <mat-error class="text-danger"
+                              *ngIf="rolePermissionFormGroup.get('startDate').touched && rolePermissionFormGroup.get('endDate').hasError('required')">
+                              End date is required
+                            </mat-error>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <mat-checkbox color="primary" formControlName="isAllowDownload">Allow Download</mat-checkbox>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="col-md-12 mt-4 text-center">
+                  <button class="btn btn-success btn-lg m-r-10" style="padding: 10px 30px; font-size: 1.1rem;" (click)="SaveDocument()" [disabled]="loading" cdkFocusInitial>
+                    <i-feather *ngIf="!loading" name="save" class="small-icon"></i-feather>
+                    <span *ngIf="loading"><i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></i></span>
+                    {{ "Send" | translate }}
+                  </button>
+                  <button type="button" class="btn btn-danger btn-lg" style="padding: 10px 30px; font-size: 1.1rem;" [routerLink]="['/']">
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- AI Prompt Modal -->
+<div class="modal" [class.show]="showModal" [style.display]="showModal ? 'block' : 'none'" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">AI Content Generator</h5>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="aiPromptInput">Enter your prompt</label>
+          <textarea [(ngModel)]="aiPrompt" id="aiPromptInput" class="form-control" rows="4"
+            placeholder="Describe what you want the AI to generate..." [ngModelOptions]="{standalone: true}"></textarea>
+          <div *ngIf="errorMessage" class="alert alert-danger mt-2">
+            {{ errorMessage }}
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeAiModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="generateContent()" [disabled]="isGenerating">
+          <span *ngIf="!isGenerating">Generate</span>
+          <span *ngIf="isGenerating">Generating...</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal backdrop -->
+<div class="modal-backdrop fade show" *ngIf="showModal"></div>
+
+<!-- Add Signature Management Modal -->
+<div class="modal" [class.show]="showSignatureModal" [style.display]="showSignatureModal ? 'block' : 'none'" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Manage Signatures</h5>
+        <button type="button" class="btn-close" (click)="closeSignatureModal()"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Add New Signature Section -->
+        <div class="mb-4 p-3 border rounded shadow-sm">
+          <h6 class="mb-3">Add New Signature</h6>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Signature Name</label>
+                <input type="text" class="form-control" [(ngModel)]="newSignatureName" placeholder="e.g., Official Signature">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Upload File</label>
+                <input class="form-control" type="file" (change)="onNewSignatureSelect($event)" accept="image/*">
+                <small class="text-muted">Max file size: 2MB. Supported formats: PNG, JPG, JPEG, GIF</small>
+              </div>
+            </div>
+          </div>
+          <!-- Preview of new signature -->
+          <div *ngIf="tempSignatureUrl" class="mt-3">
+            <label>Preview:</label>
+            <img [src]="tempSignatureUrl" class="img-fluid" style="max-height: 100px;" alt="New signature preview">
+          </div>
+          <div class="mt-3 text-center">
+            <button class="btn btn-primary" (click)="addNewSignature()" [disabled]="!newSignatureName || !newSignatureFile">
+              <i-feather name="plus" class="small-icon"></i-feather>
+              Add Signature
+            </button>
+          </div>
+        </div>
+
+        <!-- Existing Signatures List -->
+        <h6 class="mb-3">Your Signatures</h6>
+        <div class="row">
+          <div class="col-md-4 mb-3" *ngFor="let signature of savedSignatures">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <img [src]="signature.signatureData || signature.url" 
+                     class="img-fluid mb-2" 
+                     style="max-height: 100px;" 
+                     alt="Signature Preview"
+                     (load)="onImageLoad($event, signature)"
+                     (error)="onImageError($event, signature)">
+                <h6 class="card-title mb-2">{{signature.name}}</h6>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-sm btn-danger" (click)="deleteSignature(signature.id)">
+                    <i-feather name="trash" class="small-icon"></i-feather>
+                    Delete
+                  </button>
+                  <button class="btn btn-sm btn-success" (click)="selectSignature(signature)">
+                    <i-feather name="check" class="small-icon"></i-feather>
+                    Select
+                  </button>
+                </div>
+                <small class="text-muted d-block mt-2">Added: {{signature.createdAt | date:'medium'}}</small>
+              </div>
+            </div>
+          </div>
+          <!-- No signatures message -->
+          <div *ngIf="savedSignatures.length === 0" class="col-12">
+            <div class="alert alert-info">
+              No signatures added yet. Add your first signature above.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeSignatureModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal backdrop -->
+<div class="modal-backdrop fade show" *ngIf="showSignatureModal"></div>
+
+<!-- Quill Editor Assets -->
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script> 
