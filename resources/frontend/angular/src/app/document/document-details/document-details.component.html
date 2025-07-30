@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 mb-2">
-                <span class="mb-0 page-title">{{'DOCUMENT_DETAILS' | translate}} :
+                <span class="mb-0 page-title">{{'Memo Details' | translate}} :
                     <span class="ps-2 text-primary">{{documentInfo.name}}</span>
                 </span>
             </div>
@@ -16,7 +16,7 @@
                                 <div class="body">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label class="fw-bold">{{'Department' | translate }} :</label>
+                                            <label class="fw-bold">{{'Division' | translate }} :</label>
                                             <p>{{documentInfo.categoryName}}</p>
                                         </div>
                                         <!-- <div class="col-md-3">
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                         </mat-tab>
-                        <mat-tab class="nav-tabs" label="{{'DOCUMENT_AUDIT_TRAIL' | translate}}">
+                        <mat-tab class="nav-tabs" label="{{'Memo Audit' | translate}}">
                             <div class="card tab-card">
                                 <div class="body">
                                     <app-document-audit-trails [shouldLoad]="loadedTabs[2]"

@@ -50,7 +50,7 @@ export const UserStore = signalStore(
                 email: user.email,
                 positionName: user.positionName,
                 // displayName: `${user.firstname} ${user.lastname} (${user.positionName})`
-                displayName: `${user.positionName}`
+                displayName: `${user.positionName} (${user.firstname} ${user.lastname})`
             }));
         }),
     })),

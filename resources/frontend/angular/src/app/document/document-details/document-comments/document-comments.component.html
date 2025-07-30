@@ -12,7 +12,17 @@
                 </h6>
                 <div class="w-100">
                     <small class="m-r-10">
-                        {{documentComment.createdDate | utcToLocalTime:'short'}}
+                        Status:
+                        <span [style.color]="documentComment.statusColorCode">
+                            {{documentComment.statusName || ''}}
+                        </span>
+                    </small>
+                    <small class="m-r-10">
+                        Due Date: <span class="text-danger">{{documentComment.endDate ? (documentComment.endDate |
+                            utcToLocalTime:'short') : 'Not set'}}</span>
+                    </small>
+                    <small class="m-r-10">
+                        Delivery Date: {{documentComment.createdDate | utcToLocalTime:'short'}}
                     </small>
                     <small class="text-primary">{{documentComment?.createdByName}}
                     </small>
@@ -26,34 +36,54 @@
         <form [formGroup]="commentForm">
             <div class="row mb-2">
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-outline-secondary btn-sm me-2" (click)="appendAbbreviation('FYI')">
+                    <button *ngIf="isDirectorGeneral" type="button" class="btn btn-outline-secondary btn-sm me-2"
+                        (click)="appendAbbreviation('FYI')">
                         FYI
                     </button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm me-2" (click)="appendAbbreviation('ASAP')">
+                    <button *ngIf="isDirectorGeneral" type="button" class="btn btn-outline-secondary btn-sm me-2"
+                        (click)="appendAbbreviation('ASAP')">
                         ASAP
                     </button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm me-2" (click)="appendAbbreviation('NB')">
+                    <button *ngIf="isDirectorGeneral" type="button" class="btn btn-outline-secondary btn-sm me-2"
+                        (click)="appendAbbreviation('NB')">
                         NB
                     </button>
-                    <button type="button" class="btn btn-outline-secondary btn-sm me-2" (click)="appendAbbreviation('PS')">
+                    <button *ngIf="isDirectorGeneral" type="button" class="btn btn-outline-secondary btn-sm me-2"
+                        (click)="appendAbbreviation('PS')">
                         PS
                     </button>
-                    <button *ngIf="isDirectorGeneral" type="button" class="btn btn-outline-primary btn-sm" (click)="toggleNumberInput()">
+                    <button *ngIf="isDirectorGeneral" type="button" class="btn btn-outline-primary btn-sm"
+                        (click)="toggleNumberInput()">
                         123 → Words
                     </button>
-                    <!-- <button type="button" class="btn btn-outline-primary btn-sm" (click)="toggleNumberInput()">
-                        123 → Words
-                    </button> -->
-                </div>
-            </div>
-            <div class="row mb-2" *ngIf="showNumberInput">
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <input type="number" class="form-control form-control-sm" [(ngModel)]="numberInputValue" [ngModelOptions]="{standalone: true}" placeholder="Enter number">
-                        <button class="btn btn-sm btn-primary" type="button" (click)="convertNumberToWords()">Convert</button>
+
+                    <div class="row mb-2" *ngIf="showNumberInput">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input type="number" class="form-control form-control-sm" [(ngModel)]="numberInputValue"
+                                    [ngModelOptions]="{standalone: true}" placeholder="Enter number">
+                                <button class="btn btn-sm btn-primary" type="button"
+                                    (click)="convertNumberToWords()">Convert</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Status Dropdown -->
+                    <div class="col-md-4 ms-2 mt-1">
+                        <label class="form-label">{{ 'Memo Status' | translate }}</label>
+
+                        <ng-select [(ngModel)]="selectedStatusId" [ngModelOptions]="{standalone: true}"
+                            [searchable]="true" [clearable]="false" placeholder="{{ 'SELECT_STATUS' | translate }}">
+                            <ng-option *ngFor="let documentStatus of documentstatusStore.statusList()"
+                                [value]="documentStatus.id">
+                                <span [ngStyle]="{'color': documentStatus?.colorCode}"> {{ documentStatus.name }}
+                                </span>
+                            </ng-option>
+                        </ng-select>
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-12 m-t-10">
                     <textarea class="form-control" formControlName="comment" rows="3"></textarea>

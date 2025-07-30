@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, inject } from '@angular/core';
 import {
   UntypedFormArray,
   UntypedFormBuilder,
@@ -26,6 +26,7 @@ import { TranslationService } from '@core/services/translation.service';
 import { ToastrService } from 'ngx-toastr';
 import { BaseComponent } from 'src/app/base.component';
 import { ReminderService } from 'src/app/reminder/reminder.service';
+import { UserStore } from 'src/app/user/store/user-store';
 
 @Component({
   templateUrl: './document-reminder.component.html',
@@ -42,6 +43,9 @@ export class DocumentReminderComponent extends BaseComponent implements OnInit {
   dayOfWeek = dayOfWeekArray;
   months = monthsArray;
   days: number[] = [];
+
+  // Inject UserStore
+  userStore = inject(UserStore);
 
   get dailyRemindersArray(): UntypedFormArray {
     return <UntypedFormArray>this.reminderForm.get('dailyReminders');
@@ -75,6 +79,12 @@ export class DocumentReminderComponent extends BaseComponent implements OnInit {
     this.getReminderFrequency();
     this.createReminderForm();
     this.getAuthObj();
+    // Load user positions when component initializes
+    this.loadUserData();
+  }
+
+  loadUserData() {
+    this.userStore.loadUserPositions();
   }
 
   getAuthObj() {
@@ -315,6 +325,8 @@ export class DocumentReminderComponent extends BaseComponent implements OnInit {
       this.reminderForm.addControl('halfYearlyReminders', formArray);
     }
   }
+
+  
 
   removeDailReminders() {
     if (this.reminderForm.contains('dailyReminders')) {

@@ -300,19 +300,29 @@ export class MemoBroadcastComponent extends BaseComponent implements OnInit, Aft
   }
 
   getSelectedToUsersString(): string {
-    const selectedToUsers = this.documentForm?.get('selectedToUsers')?.value || [];
-    const toUsersString = selectedToUsers.length > 0 ? 
-      selectedToUsers.map(user => `${user.firstName} ${user.lastName}`).join(', ') : '';
+    // const selectedToUsers = this.documentForm?.get('selectedToUsers')?.value || [];
+    // const toUsersString = selectedToUsers.length > 0 ?
+    //   selectedToUsers.map(user => `${user.firstName} ${user.lastName}`).join(', ') : '';
     
-    const selectedRoles = this.documentForm?.get('selectedRoles')?.value || [];
-    const rolesString = selectedRoles.length > 0 ?
-      selectedRoles.map(role => role.name).join(', ') : '';
+    // const selectedRoles = this.documentForm?.get('selectedRoles')?.value || [];
+    // const rolesString = selectedRoles.length > 0 ?
+    //   selectedRoles.map(role => role.name).join(', ') : '';
     
-    if (toUsersString && rolesString) {
-      return `${toUsersString}, ${rolesString}`;
-    } else {
-      return toUsersString || rolesString || '';
+    // if (toUsersString && rolesString) {
+    //   return `${toUsersString}, ${rolesString}`;
+    // } else {
+    //   return toUsersString || rolesString || '';
+    // }
+
+    const selectedToUsers = this.documentForm?.get('selectedToUsers')?.value;
+    if (!selectedToUsers || selectedToUsers.length === 0) {
+      return '';
     }
+    return selectedToUsers.map(user => {
+      const userObj = user as any;
+      return userObj.positionName || userObj.position || userObj.displayName || 
+             `${userObj.firstName || userObj.firstname} ${userObj.lastName || userObj.lastname}`;
+    }).join(', ');
   }
 
   getSelectedThroughUsersString(): string {

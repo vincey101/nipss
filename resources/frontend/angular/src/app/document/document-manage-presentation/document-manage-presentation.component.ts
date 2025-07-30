@@ -698,21 +698,34 @@ export class DocumentManagePresentationComponent
   
   getSelectedToUsersString(): string {
     // Get selected To users with the new format - show only firstname lastname
-    const selectedToUsers = this.documentForm?.get('selectedToUsers')?.value || [];
-    const toUsersString = selectedToUsers.length > 0 ? 
-      selectedToUsers.map(user => `${user.firstName || user.firstname} ${user.lastName || user.lastname}`).join(', ') : '';
+    // const selectedToUsers = this.documentForm?.get('selectedToUsers')?.value || [];
+    // const toUsersString = selectedToUsers.length > 0 ?
+    //   selectedToUsers.map(user => `${user.firstName || user.firstname} ${user.lastName || user.lastname}`).join(', ') : '';
     
-    // Get selected roles
-    const selectedRoles = this.documentForm?.get('selectedRoles')?.value || [];
-    const rolesString = selectedRoles.length > 0 ?
-      selectedRoles.map(role => role.name).join(', ') : '';
+    // // Get selected roles
+    // const selectedRoles = this.documentForm?.get('selectedRoles')?.value || [];
+    // const rolesString = selectedRoles.length > 0 ?
+    //   selectedRoles.map(role => role.name).join(', ') : '';
     
-    // Combine both strings with a comma if both have values
-    if (toUsersString && rolesString) {
-      return `${toUsersString}, ${rolesString}`;
-    } else {
-      return toUsersString || rolesString || '';
+    // // Combine both strings with a comma if both have values
+    // if (toUsersString && rolesString) {
+    //   return `${toUsersString}, ${rolesString}`;
+    // } else {
+    //   return toUsersString || rolesString || '';
+    // }
+
+
+     // For To users - show only positionName
+    const selectedToUsers = this.documentForm?.get('selectedToUsers')?.value;
+    if (!selectedToUsers || selectedToUsers.length === 0) {
+      return '';
     }
+    return selectedToUsers.map(user => {
+      // Type assertion to access dynamic properties
+      const userObj = user as any;
+      return userObj.positionName || userObj.position || userObj.displayName || 
+             `${userObj.firstName || userObj.firstname} ${userObj.lastName || userObj.lastname}`;
+    }).join(', ');
   }
   
   getSelectedThroughUsers(): User[] {

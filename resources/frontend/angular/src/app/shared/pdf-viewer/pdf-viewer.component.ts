@@ -81,7 +81,8 @@ export class PdfViewerComponent extends BaseComponent implements OnChanges {
       const documentVersion: DocumentVersion = {
         documentId: this.document.documentId,
         fileData: pdfFile,
-        location: 'local' // Hardcoded
+        location: 's3' // Hardcoded
+
       };
 
       // Save to API
@@ -89,19 +90,19 @@ export class PdfViewerComponent extends BaseComponent implements OnChanges {
         .saveNewVersionDocument(documentVersion)
         .subscribe({
           next: () => {
-            this.toastrService.success('Document version saved successfully');
+            this.toastrService.success('Memo Saved Successfully');
             this.overlayRef.close();
             this.router.navigate(['/']);
           },
           error: (error) => {
             console.error('Error saving document version:', error);
-            this.toastrService.error('Failed to save document version');
+            this.toastrService.error('Failed to save Memo');
           }
         });
 
     } catch (error) {
       console.error('PDF capture failed:', error);
-      this.toastrService.error('Failed to capture PDF content');
+      this.toastrService.error('Failed to capture Memo');
     }
   }
 

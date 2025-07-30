@@ -67,10 +67,10 @@ export class DocumentListComponent
     'action',
     'name',
     'categoryName',
-    'statusName',
+    // 'statusName',
     'createdDate',
-    'dueDate',
-    'modifiedDate',
+    // 'dueDate',
+    // 'modifiedDate',
     'createdBy',
   ];
   footerToDisplayed = ['footer'];

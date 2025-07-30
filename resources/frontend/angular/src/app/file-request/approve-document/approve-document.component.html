@@ -1,5 +1,5 @@
 <div class="d-flex">
-  <span mat-dialog-title class="dialog-title">{{'APPROVE_ADD_DOCUMENT' | translate}}<app-page-help-text
+  <span mat-dialog-title class="dialog-title">{{'Approve File/Document' | translate}}<app-page-help-text
       code="ADD_DOCUMENT"></app-page-help-text></span>
   <button mat-icon-button class="ms-auto" (click)="closeDialog()">
     <i-feather class="close-icon text-danger" name="x"></i-feather>
@@ -21,7 +21,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label>{{'Department' | translate}}</label>
+          <label>{{'Division' | translate}}</label>
           <ng-select formControlName="categoryId" placeholder="{{'Department' | translate}}">
             <ng-option *ngFor="let category of categoryStore.categories()" [value]="category.id">
               <div class="country-item"
@@ -37,7 +37,7 @@
           </ng-select>
           <div class="text-danger"
             *ngIf="documentForm.get('categoryId').touched && documentForm.get('categoryId').hasError('required')">
-            {{'Department is required' | translate}}
+            {{'Division is required' | translate}}
           </div>
         </div>
       </div>

@@ -34,9 +34,16 @@ class DocumentCommentRepository extends BaseRepository implements DocumentCommen
 
     public function getDocumentComment($id)
     {
-        $query = DocumentComments::select(['documentComments.*', DB::raw("CONCAT(users.firstName,' ', users.lastName) as createdByName")])
-            ->join('users', 'documentComments.createdBy', '=', 'users.id');
-        $query = $query->where('documentId', $id);
+        $query = DocumentComments::select([
+                'documentComments.*', 
+                DB::raw("CONCAT(users.firstName,' ', users.lastName) as createdByName"),
+                'documentStatus.name as statusName',
+                'documentStatus.colorCode as statusColorCode'
+            ])
+            ->join('users', 'documentComments.createdBy', '=', 'users.id')
+            ->leftJoin('documentStatus', 'documentComments.statusId', '=', 'documentStatus.id')
+            ->where('documentId', $id)
+            ->orderBy('documentComments.createdDate', 'desc');
 
         $results = $query->get();
 

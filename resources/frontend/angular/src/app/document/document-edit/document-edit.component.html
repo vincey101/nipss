@@ -1,5 +1,5 @@
 <div class="d-flex">
-  <span mat-dialog-title class="dialog-title">{{'EDIT_DOCUMENT' | translate}} <app-page-help-text
+  <span mat-dialog-title class="dialog-title">{{'Edit Memo' | translate}} <app-page-help-text
       code="ADD_DOCUMENT"></app-page-help-text> </span>
   <button mat-icon-button class="close-button" (click)="closeDialog()">
     <mat-icon class="close-icon" color="warn">close</mat-icon>
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <label class="form-label">{{'Department' | translate}}</label>
+        <label class="form-label">{{'Directorate/Department/Unit' | translate}}</label>
         <ng-select formControlName="categoryId" [clearable]="false">
           <ng-option *ngFor="let category of categoryStore.categories()" [value]="category.id">
             <div class="country-item"
@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <label class="form-label">{{ 'DOCUMENT_STATUS' | translate }}</label>
+        <label class="form-label">{{ 'Memo Status' | translate }}</label>
         <ng-select formControlName="statusId" [searchable]="true"
           placeholder="{{ 'NONE' | translate }}">
           <ng-option *ngFor="let documentStatus of documentstatusStore.statusList()" [value]="documentStatus.id">

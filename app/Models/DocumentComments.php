@@ -21,8 +21,8 @@ class DocumentComments extends Model
     const UPDATED_AT = 'modifiedDate';
 
     protected $fillable = [
-        'documentId', 'comment', 'createdBy',
-        'modifiedBy', 'isDeleted'
+        'documentId', 'comment', 'statusId', 'createdBy',
+        'modifiedBy', 'isDeleted', 'endDate'
     ];
 
     public function user()

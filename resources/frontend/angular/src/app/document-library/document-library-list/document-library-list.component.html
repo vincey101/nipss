@@ -4,7 +4,7 @@
       <div class="breadcrumb-main">
         <div class="row align-items-center">
           <div class="col">
-              <span class="page-title">{{ "ASSIGNED_DOCUMENTS" | translate }}
+              <span class="page-title">{{ "My Memo" | translate }}
                 <app-page-help-text code="ASSIGNED_DOCUMENTS"></app-page-help-text>
               </span>
           </div>
@@ -40,7 +40,7 @@
                 <input class="form-control" placeholder="{{'SEARCH_DOCUMENT_BY_META_TAGS' | translate}}" #metatag>
               </div> -->
               <div class="col-md-3">
-                <ng-select (change)="onCategoryChange($event)" placeholder="{{'Select Department' | translate}}">
+                <ng-select (change)="onCategoryChange($event)" placeholder="{{'Select Division (Directorate/Department/Unit)' | translate}}">
                   <ng-option *ngFor="let category of categoryStore.categories()" [value]="category.id">
                     <div class="country-item"
                       [ngStyle]="this.direction === 'rtl'? {'margin-right.px': category.deafLevel* 20} : {'margin-left.px': category.deafLevel* 20}">
@@ -79,6 +79,10 @@
             </div>
             <div class="row">
               <div class="col">
+                <!-- Add status note -->
+                <p class="text-danger mb-3" style="font-style: italic;">
+                  <strong>P.S.</strong> – Upon addressing the memo, please ensure the "Memo Status" is duly updated.
+                </p>
                 <div class="table-responsive">
                   <div class="grid-height-small">
                     <table mat-table [dataSource]="dataSource" class="w-100" matSort matSortActive="createdDate"

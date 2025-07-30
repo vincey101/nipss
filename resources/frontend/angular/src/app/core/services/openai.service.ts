@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class OpenAIService {
   private apiUrl = 'https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash-001:generateContent';
-  private apiKey = 'AIzaSyDZhJbl3_njSZPRfEFVFI-jadbz5swrKtc'; //Gemini Api key
+  private apiKey = ''; //Gemini Api key
 
   constructor(private http: HttpClient) {}
 

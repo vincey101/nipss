@@ -46,12 +46,12 @@
                         <td mat-cell *matCellDef="let notification">
                           <span *ngIf="!notification.isRead" class="badge bg-success">new</span>
                           <ng-container *ngIf="!notification.message">
-                            <b> {{notification.documentName}}</b> {{'DOCUMENT_PERMISSION_GRANTED_TO_YOU' | translate}}
+                            <b> {{notification.documentName}}</b> {{'Memo Assigned to you' | translate}}
                           </ng-container>
                           <ng-container *ngIf="notification.message">
                             <b>{{'REMINDER' | translate}}</b> ::
                             <ng-container *ngIf="notification.documentId">
-                              <b> {{'DOCUMENT_NAME' | translate}}</b> : {{notification.documentName}} ::
+                              <b> {{'Memo Title' | translate}}</b> : {{notification.documentName}} ::
                             </ng-container>
                             {{notification.message}}
                           </ng-container>

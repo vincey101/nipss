@@ -139,15 +139,18 @@
                           </div>
 
                           <!-- Signature Preview -->
-                          <div class="signature-preview mt-3" *ngIf="signatureImageUrl" [ngStyle]="{
+                          <div class="signature-preview mt-3" *ngIf="signatureImageUrl"
+                            [ngStyle]="{
                               'text-align': documentForm.get('signaturePosition').value,
                               'margin-top': '20px',
                               'padding-left': documentForm.get('signaturePosition').value === 'left' ? '0' : 
                                             documentForm.get('signaturePosition').value === 'right' ? '65%' : 'initial',
                               'padding-right': documentForm.get('signaturePosition').value === 'left' ? '80%' : 'initial',
-                              'margin-left': documentForm.get('signaturePosition').value === 'left' ? '-9%' : 'initial'
+                              'margin-left': documentForm.get('signaturePosition').value === 'left' ? '2%' : 'initial'
                             }">
-                            <img [src]="signatureImageUrl" alt="Signature" style="max-height: 60px; max-width: 200px;">
+                            <img [src]="signatureImageUrl" 
+                                 alt="Signature" 
+                                 style="width: 120px; height: 50px; object-fit: contain;">
                           </div>
                         </div>
 
@@ -196,7 +199,7 @@
                               }">
                               <img [src]="signatureImageUrl" 
                                    alt="Signature" 
-                                   style="max-height: 60px; max-width: 200px;">
+                                   style="width: 120px; height: 50px; object-fit: contain;">
                             </div>
                           </div>
                         </div>
@@ -285,7 +288,7 @@
                     </div>
 
                     <!-- Assign with roles -->
-                    <div class="col-md-6 sharing-field">
+                    <!-- <div class="col-md-6 sharing-field">
                       <h6 class="vew-mail-header">Assign with roles:</h6>
                       <ng-select [multiple]="true" formControlName="selectedRoles" class="compact-select">
                         <ng-option *ngFor="let role of roles" [value]="role">{{role.name}}</ng-option>
@@ -322,7 +325,7 @@
                           <mat-checkbox color="primary" formControlName="isAllowDownload">Allow Download</mat-checkbox>
                         </div>
                       </ng-container>
-                    </div>
+                    </div> -->
                   </div>
 
                 </div>

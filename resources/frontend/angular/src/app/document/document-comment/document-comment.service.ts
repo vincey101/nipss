@@ -5,7 +5,7 @@ import { DocumentComment } from '@core/domain-classes/document-comment';
 
 @Injectable({ providedIn: 'root' })
 export class DocumentCommentService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   getDocumentComment(documentId: string): Observable<DocumentComment[]> {
     const url = `documentComment/${documentId}`;

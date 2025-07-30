@@ -94,7 +94,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'document-audit-trails',
-    title: 'DOCUMENTS_AUDIT_TRAIL',
+    title: 'Memo Audit Trail',
     icon: 'activity',
     class: '',
     groupTitle: false,
@@ -103,7 +103,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'archived-documents',
-    title: 'ARCHIVED_DOCUMENTS',
+    title: 'Archived Memo',
     icon: 'archive',
     class: '',
     groupTitle: false,
@@ -121,7 +121,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'categories',
-    title: 'Department',
+    title: 'Divisions',
     icon: 'file',
     class: '',
     groupTitle: false,
@@ -130,7 +130,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'positions',
-    title: 'Position',
+    title: 'Rank',
     icon: 'briefcase',
     class: '',
     groupTitle: false,
@@ -140,7 +140,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'document-status',
-    title: 'DOCUMENT_STATUS',
+    title: 'Memo Status',
     icon: 'check',
     class: '',
     groupTitle: false,

@@ -95,7 +95,7 @@ export class DocumentPermissionListComponent
         .getDocumentComment(this.document.id)
         .subscribe((comments) => {
           // Check if the current user has commented
-          this.hasComments = comments && comments.some(comment => 
+          this.hasComments = comments && comments.some(comment =>
             comment.createdBy === this.currentUserId
           );
           console.log('User has commented:', this.hasComments);
@@ -258,24 +258,27 @@ export class DocumentPermissionListComponent
     } else if (maxUserPermissionEndDate) {
       expiryDate = maxUserPermissionEndDate;
     }
-    
+
     // Store the expiry date in localStorage if we have one
     if (expiryDate && document) {
       const storageKey = `doc_expiry_${document.id}_${document.name}`;
       localStorage.setItem(storageKey, new Date(expiryDate).toISOString());
     }
-    
+
     return expiryDate;
   }
 
   getStoredExpiryDate(document: any): Date | null {
     if (!document) return null;
-    
+
     const storageKey = `doc_expiry_${document.id}_${document.name}`;
     const storedDate = localStorage.getItem(storageKey);
     if (storedDate) {
-      return new Date(storedDate);
+      const parsedDate = new Date(storedDate);
+      // console.log('Parsed Due Date:', parsedDate);
+      return parsedDate;
     }
+    // console.log('No Due Date Found');
     return null;
   }
 }

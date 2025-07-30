@@ -33,15 +33,22 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row m-t-10">
           <div class="col-md-4">
             <mat-checkbox color="primary" (change)="checkData($event)" formControlName="isRepeated">
-              {{'REPEATE_REMINDER' | translate}}
+              {{'Repeat Reminder' | translate}}
             </mat-checkbox>
           </div>
           <div class="col-md-2">
-            <mat-checkbox color="primary" formControlName="isEmailNotification">{{'SEND_EMAIL' |
-              translate}}</mat-checkbox>
+            <mat-checkbox color="primary" formControlName="isEmailNotification">{{'SEND_EMAIL' | translate}}
+            </mat-checkbox>
+          </div>
+          <div class="col-md-4">
+            <ng-select placeholder="{{'SELECT_USERS' | translate}}" [multiple]="true" formControlName="selectedUsers">
+              <ng-option *ngFor="let user of userStore.formattedUserPositions()" [value]="user">
+                {{user.displayName}}
+              </ng-option>
+            </ng-select>
           </div>
         </div>
         <div class="row" *ngIf="reminderForm.get('isRepeated').value">
